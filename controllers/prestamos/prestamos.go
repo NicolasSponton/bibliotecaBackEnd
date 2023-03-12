@@ -39,7 +39,7 @@ func GetAll(c echo.Context) error {
 	}
 
 	if c.QueryParam("q") != "" {
-		where = where + " AND prestamos.Alumno.apellido LIKE '%" + c.QueryParam("q") + "%'"
+		where = where + " AND fecha_prestamo LIKE '%" + c.QueryParam("q") + "%'"
 	}
 
 	sort := "id DESC"
