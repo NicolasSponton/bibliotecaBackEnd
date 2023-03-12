@@ -39,7 +39,7 @@ func GetAll(c echo.Context) error {
 	}
 
 	if c.QueryParam("q") != "" {
-		where = where + " AND fecha_prestamo LIKE '%" + c.QueryParam("q") + "%'"
+		where = where + " AND alumnos.apellido LIKE '%" + c.QueryParam("q") + "%'"
 	}
 
 	sort := "id DESC"
@@ -64,7 +64,7 @@ func GetAll(c echo.Context) error {
 
 	//===============================================
 
-	if err := db.Where(where).Offset(offset).Order(sort).Limit(limit).Preload("Libro").Preload("Alumno").Find(&prestamos).Error; err != nil {
+	if err := db.Joins("left JOIN alumnos ON alumnos.id = prestamos.id_alumno").Joins("left JOIN libros ON libros.id = prestamos.id_libro").Where(where).Offset(offset).Order(sort).Limit(limit).Preload("Libro").Preload("Alumno").Find(&prestamos).Error; err != nil {
 		response := ResponseMessage{
 			Status:  "error",
 			Message: err.Error(),
@@ -72,7 +72,7 @@ func GetAll(c echo.Context) error {
 		return c.JSON(http.StatusInternalServerError, response)
 	}
 
-	if err := db.Model(&prestamos).Where(where).Count(&totalDataSize).Error; err != nil {
+	if err := db.Model(&prestamos).Joins("left JOIN alumnos ON alumnos.id = prestamos.id_alumno").Joins("left JOIN libros ON libros.id = prestamos.id_libro").Where(where).Count(&totalDataSize).Error; err != nil {
 		response := ResponseMessage{
 			Status:  "error",
 			Message: err.Error(),

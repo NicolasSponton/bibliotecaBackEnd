@@ -11,4 +11,5 @@ type Prestamo struct {
 	FechaDevolucion *time.Time `json:"fechaDevolucion" gorm:"default: null"`
 	Alumno          Alumno     `json:"alumno,omitempty" gorm:"ForeignKey:IdAlumno"`
 	Libro           Libro      `json:"libro,omitempty" gorm:"ForeignKey:IdLibro"`
+	Apellido        string     `json:"apellido,omitempty"`
 }

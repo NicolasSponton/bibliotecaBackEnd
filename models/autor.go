@@ -3,12 +3,12 @@ package models
 import "time"
 
 type Autor struct {
-	Id                uint       `json:"id" gorm:"primaryKey"`
+	Id                int        `json:"id" gorm:"primaryKey"`
 	Nombre            string     `json:"nombre" gorm:"not null"`
 	Apellido          string     `json:"apellido"`
 	FechaDeNacimiento *time.Time `json:"fechaDeNacimiento"`
 	FechaDeDefuncion  *time.Time `json:"fechaDeDefuncion"`
-	Libros            []Libro    `json:"libros,omitempty"`
+	Libros            []Libro    `json:"libros,omitempty" gorm:"foreignKey:IdAutor"`
 }
 
 func (Autor) TableName() string {

@@ -54,7 +54,7 @@ func GetAll(c echo.Context) error {
 
 	//===============================================
 
-	if err := db.Where(where).Offset(offset).Order(sort).Limit(limit).Preload("Autor").Preload("Editorial").Preload("Categoria").Find(&libros).Error; err != nil {
+	if err := db.Select("libros.*, COUNT(prestamos.id) as CopiasPrestadas").Joins("left JOIN prestamos ON (prestamos.id_libro = libros.id AND prestamos.fecha_devolucion IS null)").Where(where).Group("libros.id").Offset(offset).Order(sort).Limit(limit).Preload("Autor").Preload("Editorial").Preload("Categoria").Find(&libros).Error; err != nil {
 		response := ResponseMessage{
 			Status:  "error",
 			Message: err.Error(),

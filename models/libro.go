@@ -14,4 +14,5 @@ type Libro struct {
 	Editorial          Editorial  `json:"editorial,omitempty" gorm:"ForeignKey:IdEditorial"`
 	Categoria          Categoria  `json:"categoria,omitempty" gorm:"ForeignKey:IdCategoria"`
 	Autor              Autor      `json:"autor,omitempty" gorm:"ForeignKey:IdAutor"`
+	CopiasPrestadas    int        `json:"copiasPrestadas,omitempty" gorm:"->;-:migration"`
 }
