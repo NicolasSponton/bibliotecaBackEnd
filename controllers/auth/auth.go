@@ -37,12 +37,15 @@ func Login(c echo.Context) error {
 			Status:  "error",
 			Message: result.Error.Error(),
 		}
+		return c.JSON(http.StatusInternalServerError, response)
+	}
 
-		if result.Error.Error() == "record not found" {
-			return c.JSON(http.StatusUnauthorized, response)
-		} else {
-			return c.JSON(http.StatusInternalServerError, response)
+	if result.RowsAffected == 0 {
+		response := ResponseMessage{
+			Status:  "error",
+			Message: result.Error.Error(),
 		}
+		return c.JSON(http.StatusUnauthorized, response)
 	}
 
 	// Set custom claims
