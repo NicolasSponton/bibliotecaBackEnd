@@ -6,6 +6,8 @@ import (
 	"strings"
 
 	"gorm.io/driver/mysql"
+	"gorm.io/driver/postgres"
+	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 )
@@ -39,6 +41,31 @@ func InitConnection() {
 	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Info),
 	})
+
+	if err != nil {
+		log.Println("Connection Failed to Open")
+	} else {
+		log.Println("Connection Established")
+	}
+
+}
+
+func InitConnectionLite() {
+
+	db, err = gorm.Open(sqlite.Open("libsql://biblioteca-nicolassponton.turso.io"), &gorm.Config{})
+
+	if err != nil {
+		log.Println("Connection Failed to Open")
+	} else {
+		log.Println("Connection Established")
+	}
+
+}
+
+func InitConnectionPostgreSQL() {
+
+	dsn := "postgresql://NicolasSponton:Xk6iPodSbp0n@ep-tight-unit-a2efvxhv.eu-central-1.aws.neon.tech/biblioteca?sslmode=require"
+	db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
 	if err != nil {
 		log.Println("Connection Failed to Open")

@@ -12,7 +12,9 @@ func main() {
 
 	e := echo.New()
 
-	database.InitConnection()
+	// database.InitConnection()
+	// database.InitConnectionLite()
+	database.InitConnectionPostgreSQL()
 	utils.MigrateSchemas()
 	routes.HandleRoutes(e)
 
