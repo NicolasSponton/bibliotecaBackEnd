@@ -4,7 +4,7 @@ import "time"
 
 type Autor struct {
 	Id                int        `json:"id" gorm:"primaryKey"`
-	Nombre            string     `json:"nombre" gorm:"not null"`
+	Nombre            string     `json:"nombre"`
 	Apellido          string     `json:"apellido"`
 	FechaDeNacimiento *time.Time `json:"fechaDeNacimiento"`
 	FechaDeDefuncion  *time.Time `json:"fechaDeDefuncion"`

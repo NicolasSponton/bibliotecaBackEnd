@@ -7,7 +7,7 @@ type Prestamo struct {
 	IdAlumno        int        `json:"idalumno"`
 	IdLibro         int        `json:"idlibro"`
 	FechaPrestamo   time.Time  `json:"fechaPrestamo"`
-	FechaLimite     time.Time  `json:"fechaLimite" gorm:"not null"`
+	FechaLimite     time.Time  `json:"fechaLimite"`
 	FechaDevolucion *time.Time `json:"fechaDevolucion" gorm:"default: null"`
 	Alumno          Alumno     `json:"alumno,omitempty" gorm:"ForeignKey:IdAlumno"`
 	Libro           Libro      `json:"libro,omitempty" gorm:"ForeignKey:IdLibro"`

@@ -5,6 +5,6 @@ type Usuario struct {
 	Nombre   string `json:"nombre"`
 	Apellido string `json:"apellido"`
 	Email    string `json:"email"`
-	Usuario  string `json:"usuario" gorm:"not null"`
-	Clave    string `json:"clave" gorm:"not null"`
+	Usuario  string `json:"usuario"`
+	Clave    string `json:"clave"`
 }

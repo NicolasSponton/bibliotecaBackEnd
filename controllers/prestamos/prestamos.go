@@ -94,7 +94,7 @@ func GetAllByMonth(c echo.Context) error {
 	estadisticas := []Estadisticas{}
 
 	//===============================================
-	result := db.Raw("SELECT month(fecha_prestamo) AS mes, COUNT(*) AS cantidad  FROM prestamos WHERE Year(fecha_prestamo) = YEAR(CURRENT_DATE()) GROUP BY month(fecha_prestamo)").Find(&estadisticas)
+	result := db.Select("date_part('month', fecha_prestamo) AS mes, COUNT(*) AS cantidad").Table("prestamos").Where("date_part('year', fecha_prestamo) = date_part('year', CURRENT_DATE)").Group("date_part('month', fecha_prestamo)").Find(&estadisticas)
 	if result.Error != nil {
 		response := ResponseMessage{
 			Status:  "error",

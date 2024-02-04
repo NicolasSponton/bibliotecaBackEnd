@@ -4,10 +4,10 @@ import "time"
 
 type Libro struct {
 	Id                 int        `json:"id"`
-	IdEditorial        int        `json:"ideditorial"`
-	IdCategoria        int        `json:"idcategoria"`
-	IdAutor            int        `json:"idautor"`
-	Titulo             string     `json:"titulo" gorm:"not null"`
+	IdEditorial        int        `json:"ideditorial" gorm:"default:null"`
+	IdCategoria        int        `json:"idcategoria" gorm:"default:null"`
+	IdAutor            int        `json:"idautor" gorm:"default:null"`
+	Titulo             string     `json:"titulo"`
 	Edicion            string     `json:"edicion"`
 	FechaDePublicacion *time.Time `json:"fechaDePublicacion"`
 	Copias             int        `json:"copias"`
