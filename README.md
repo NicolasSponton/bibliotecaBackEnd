@@ -18,7 +18,7 @@ Library loan management application - Back End
 
 1. Clone the repo
    ```sh
-   git clone NicolasSponton/bibliotecaFrontEnd
+   git clone NicolasSponton/bibliotecaBackEnd
    ```
 2. Install packages
    ```sh
